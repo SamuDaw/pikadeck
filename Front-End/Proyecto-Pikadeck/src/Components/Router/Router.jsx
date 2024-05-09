@@ -6,9 +6,7 @@ import { match } from 'path-to-regexp'
 
 export function Router ({ children, defaultComponent: DefaultComponent = () => null }){
   const [location, setLocation] = useState(window.location.pathname)
-  console.log(children)
   useEffect(() => {
-    console.log('useEffect')
     const onLocationChange = () => {
       setLocation(window.location.pathname) //Esto va a ser que se vuelva a renderizar el componente, por lo que cambiara el contenido en función al estado. esto se ejecutara al cambiar la url
     }
@@ -31,15 +29,11 @@ export function Router ({ children, defaultComponent: DefaultComponent = () => n
 
     return props
   })
-  console.log(routesFromChildren)
 
   const Page = routesFromChildren.find(route => 
     {
-      console.log(route)
       const { path } = route
-      console.log("Comprueba que sea la misma ruta")
       if(path === location) return true
-      console.log("Esto sigue")
       const matchFunction = match(path, {decode: decodeURIComponent})
       const matchResult = matchFunction(location)
       if(matchResult) {
@@ -49,7 +43,6 @@ export function Router ({ children, defaultComponent: DefaultComponent = () => n
       return false
 
     })?.Component || DefaultComponent // Teniendo en cuenta que routes es un array usamos un find. En el caso de que un path guardado del array coincida con el que pasamos se renderizará el componente asociado ya que find devuelve el objeto, en caso de que sea null se mostrará la página por defecto
-  console.log(Page)
   return Page 
   ? <Page routeParams={routeParams}/> 
   : <DefaultComponent /> // Si Page es true se renderiza el componente, si no se renderiza el componente por defecto. Lo que tenemos que poner en el page no es mas que este mismo router como el componente que es

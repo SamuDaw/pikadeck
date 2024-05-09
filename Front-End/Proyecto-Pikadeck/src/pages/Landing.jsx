@@ -8,6 +8,7 @@ export default function Landing() {
     <>
       <h1>Bienvenido a Pikadeck</h1>
       <Link to='/pruebas'>Pruebas</Link>
+      <Link to='/sesion'>Gestion de la sesión</Link>
     </>
   )
   
