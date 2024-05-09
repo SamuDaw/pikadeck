@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  pokemon_app:
+    container_name: pokemon_app
+    image: pokemonapi
+    build: .
+    ports:
+      - 8080:8080
+#  wildfly:
+#    image: bitnami/wildfly
+#    container_name: "wildfly"
+#    environment:
+#      - WILDFLY_USERNAME=admin
+#      - WILDFLY_PASSWORD=password
+#      - WILDFLY_MANAGEMENT_LISTEN_ADDRESS=0.0.0.0
+#    ports:
+#      - "8080:8080"
+#      - "9990:9990"
+#    volumes:
+#      - "./helloworld/deployments:/opt/jboss/wildfly/standalone/deployments"
+
+#    volumes:
+#      - img:/Pokemon/Pokemon/src/main/resources/static/img
+#volumes:
+#    img:
+#    depends_on:
+#      - app_db
+#  app_db:
+#    container_name: app_db
+#    image: mysql
+#    ports:
+#      - 3306:3306
+#    environment:
+#      MYSQL_ROOT_PASSWORD: password
+#      MYSQL_DATABASE: pokemon
+#    volumes:
+#      - db:/var/lib/mysql
+#  phpmyadmin:
+#    depends_on:
+#      - app_db
+#    image: phpmyadmin/phpmyadmin
+#    ports:
+#      - '8081:80'
+#    environment:
+#      PMA_HOST: app_db
+#      MYSQL_ROOT_PASSWORD: root
+#volumes:
+#  db:

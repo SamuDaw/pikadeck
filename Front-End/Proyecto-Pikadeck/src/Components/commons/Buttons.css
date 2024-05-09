@@ -1,0 +1,20 @@
+button{
+  border-radius: 5px;
+  padding: 10px;
+}
+.buy-button{
+  background-color: lightskyblue;
+  border: 1px solid lightskyblue;
+}
+.add-to-cart-button{
+  background-color: white;
+  border: 1px solid lightskyblue;
+}
+.add-to-cart-button:hover{
+  background-color: lightskyblue;
+  color: white;
+}
+.buy-button:hover{
+  background-color: white;
+  color: lightskyblue;
+}
