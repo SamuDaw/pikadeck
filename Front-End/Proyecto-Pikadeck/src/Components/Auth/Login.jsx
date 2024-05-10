@@ -17,12 +17,22 @@ export function Login() {
     console.log(formData)
     console.log(formData.get('username'), formData.get('password')) // Con el get cogemos el dato haciendo referencia al name del input
 
-    var token
-    // await setTimeout(async () => {token = await loginUser(JSON.stringify(formData))}, 20000)
-    await new Promise(resolve => setTimeout(resolve, 2000)) // Simulamos una petición que tarda 2 segundos
+    const infoUser = {
+      username: formData.get('username'),
+      password: formData.get('password')
+    }
+    const json = JSON.stringify(infoUser)
+    console.log(json)
+    let token = null
+    try {
+      token = await loginUser(json)
+    }
+    catch(e){
+      console.log(e)
+    }
 
     setLoading(false)
-    setToken(token);
+    setToken(token.token);
 
     console.log(token)
   }
