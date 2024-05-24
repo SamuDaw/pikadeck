@@ -83,4 +83,9 @@ public class CartaService {
         return nuevaCartaDTO;
     }
 
+    // Metodo para conectar con el repositorio de cartas y encontrar todas las cartas segun tipo de carta especificado y sobre
+    public List<Carta> getCartasPorTipoCartaYSobre(TipoCarta TipoCarta, Sobre sobre)
+    {
+        return cartaRepository.findAllByTipoCartaAndSobre(TipoCarta, sobre);
+    }
 }

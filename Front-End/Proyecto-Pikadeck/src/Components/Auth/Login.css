@@ -1,0 +1,56 @@
+.formLogin{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1em;
+}
+.formLogin-content{
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.formInput{
+  border: none;
+  padding: 10px;
+  width: 89%;
+  background-color: #313131;
+  border-bottom: 1px solid white;
+  color: white;
+}
+.formInput:focus{
+  outline: none;
+}
+.formLogin-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1em;
+  padding: 20px;
+  background-color: #313131;
+  width: 20%;
+  border-radius: 10px;
+  min-height: 50vh;
+  box-shadow: 1px 1px 10px 1px #000; 
+}
+.formLogin-enlace-register{
+  text-align: center;
+  text-decoration: none;
+  color: #FCCF02;
+}
+.formLogin-enlace-register:hover{
+  color: #FCCF02;
+  text-decoration: underline;
+}
+.formSubmit{
+  background-color: #FCCF02;
+  color: #313131;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer; 
+}

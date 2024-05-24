@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.NumberFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class Pedido {
             inverseJoinColumns = @JoinColumn(name="fk_sobre", nullable = false)
     )
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Sobre> sobres;
+    private List<Sobre> sobres = new ArrayList<>();
 
     public Long getIdPedido() {
         return idPedido;

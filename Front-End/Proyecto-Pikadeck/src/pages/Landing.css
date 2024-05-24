@@ -1,0 +1,55 @@
+.landingContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+.presentation{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.presentation-title{
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 2em;
+}
+.presentation-images{
+  position: relative;
+}
+.presentation-images
+{
+  width: 500px;
+}
+.squirtleMalo{
+  position: absolute;
+  left: 200px;
+  z-index: -1;
+  transform: rotate(10deg);
+  border-radius: 15px;
+}
+.pikachuSorprendido{
+  position: absolute;
+  right: 300px;
+  z-index: -1;
+  transform: rotate(-10deg);
+  border-radius: 15px;
+}
+.boton-landing{
+  background-color: #f7d828;
+  color: #0a0f50;
+  gap: 10px;
+  padding: 5px;
+  padding-top: 0px;
+  border-radius: 5px;
+  width: 5em;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: 0.3s;
+}

@@ -1,0 +1,58 @@
+
+.producto{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.imagenSobre{
+    width: 7em;
+    height: 14em;
+    margin-right: 10px;
+    padding: 1em;
+    /* //border: white 1px solid; */
+    border-radius: 1em;
+}
+
+.infoProducto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 7em;
+    margin-right: 10px;
+    padding: 1em;
+    border: white 1px solid;
+    border-radius: 1em;
+}
+
+.nombreProducto{
+    margin: 0;
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+
+.preciosProducto{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
+    border-radius: 1em;
+}
+
+.precioProductoSinDescuento{
+
+    text-align: center;
+    color: red;
+    text-decoration: line-through;
+    margin-right: 1em;
+}
+
+.precioProductoActual{
+    font-weight: bold;
+    text-align: center;
+}

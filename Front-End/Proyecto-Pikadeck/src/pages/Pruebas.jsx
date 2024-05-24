@@ -10,7 +10,6 @@ export default function Pruebas() {
       <h1>Pruebas</h1>
       <p>Esto es una página de pruebas</p>
       <p>El parametro que pasamos por url es: {id ? id : null}</p>
-      {/* <Link className='MeGustaLaFruta' to='/'>Ir a la Landing</Link> */}
     </>
   )
 }

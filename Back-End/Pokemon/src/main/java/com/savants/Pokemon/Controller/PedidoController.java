@@ -132,7 +132,12 @@ public class PedidoController {
                 return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
             }
 
-            pedido.setUser(loggedUserEncontrado.get());
+            User usuario = loggedUserEncontrado.get();
+
+            // Asignamos el usuario al pedido
+            pedido.setUser(usuario);
+            // Asignamos pedido al usuario
+            usuario.getPedidos().add(pedido);
 
             // Asignar la fecha actual al pedido
             pedido.setFecha(new Date());
@@ -142,6 +147,15 @@ public class PedidoController {
             // Calcular el precio total de los sobres en el carrito
             double precioTotal = carritoUsuario.getSobres().stream().mapToDouble(Sobre::getPrecio).sum();
             pedido.setPrecio(precioTotal);
+
+            //Asignar los sobres al pedido
+            // Para no hacer referencia al mismo espacio de memoria y por ende hayan errores hacemos una nueva lista
+            List<Sobre> sobresCarrito = new ArrayList<Sobre>(carritoUsuario.getSobres());
+            pedido.setSobres(sobresCarrito);
+
+            // Añadir sobres al user
+            usuario.getSobres().addAll(sobresCarrito);
+
 
             pedidoService.guardarPedido(pedido);
 

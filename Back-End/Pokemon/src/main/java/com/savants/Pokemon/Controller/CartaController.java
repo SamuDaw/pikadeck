@@ -2,6 +2,8 @@ package com.savants.Pokemon.Controller;
 
 import com.savants.Pokemon.DTOs.CartaDTO;
 import com.savants.Pokemon.Models.Carta;
+import com.savants.Pokemon.Models.Role;
+import com.savants.Pokemon.Models.User;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -12,6 +14,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,9 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/cartas")
@@ -33,15 +36,17 @@ public class CartaController
     private final SobreService sobreService;
     private final PokemonService pokemonService;
     private final StorageService storageService;
+    private final UserService userService;
 
     @Autowired
-    public CartaController(CartaService cartaService, TipoCartaService tipoCartaService, TipoEnergiaService tipoEnergiaService, SobreService sobreService, PokemonService pokemonService, StorageService storageService) {
+    public CartaController(CartaService cartaService, TipoCartaService tipoCartaService, TipoEnergiaService tipoEnergiaService, SobreService sobreService, PokemonService pokemonService, StorageService storageService, UserService userService) {
         this.cartaService = cartaService;
         this.tipoCartaService = tipoCartaService;
         this.tipoEnergiaService = tipoEnergiaService;
         this.sobreService = sobreService;
         this.pokemonService = pokemonService;
         this.storageService = storageService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -164,25 +169,64 @@ public class CartaController
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }*/
-@GetMapping("/imagen/{nombreImagen}")
-public ResponseEntity<?> descargarImagen(@PathVariable String nombreImagen) {
-    try {
-        Path filePath = storageService.load(nombreImagen);
-        byte[] fileContent = Files.readAllBytes(filePath);
-        String mimeType = Files.probeContentType(filePath);
+    @GetMapping("/imagen/{nombreImagen}")
+    public ResponseEntity<?> descargarImagen(@PathVariable String nombreImagen) {
+        try {
+            Path filePath = storageService.load(nombreImagen);
+            byte[] fileContent = Files.readAllBytes(filePath);
+            String mimeType = Files.probeContentType(filePath);
 
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(mimeType))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + filePath.getFileName().toString() + "\"")
-                .body(new ByteArrayResource(fileContent));
-    } catch (StorageFileNotFoundException e) {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Error al descargar la imagen: " + e.getMessage());
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(mimeType))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + filePath.getFileName().toString() + "\"")
+                    .body(new ByteArrayResource(fileContent));
+        } catch (StorageFileNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al descargar la imagen: " + e.getMessage());
+        }
     }
-}
 
+    @GetMapping("/inventarioCartas")
+    public ResponseEntity<?> getInventarioCartas()
+    {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        List<Role> roles = userService.getRolesByUsername(username);
+
+        boolean hasRoleBasic = roles.stream().anyMatch(role -> role.getRole().equals("ROLE_BASIC") || role.getRole().equals("ROLE_PREMIUM"));
+        if (!hasRoleBasic) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body("No tienes permisos para acceder a este recurso");
+        }
+
+        List<User> usuarios = userService.findAll();
+        Optional<User> loggedUserEncontrado = usuarios.stream().filter(user -> Objects.equals(user.getUsername(), username)).findFirst();
+
+        User user = loggedUserEncontrado.get();
+
+        List<Carta> cartasUser = user.getCartas();
+
+        return ResponseEntity.ok(cartasUser);
+    }
+
+    @GetMapping("/borrarCartas")
+    public ResponseEntity<?> borrarCartasUser()
+    {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        List<User> usuarios = userService.findAll();
+        Optional<User> loggedUserEncontrado = usuarios.stream().filter(user -> Objects.equals(user.getUsername(), username)).findFirst();
+
+        User user = loggedUserEncontrado.get();
+
+        user.setCartas(new ArrayList<>());
+
+        userService.save(user);
+        return null;
+    }
 }
 
 

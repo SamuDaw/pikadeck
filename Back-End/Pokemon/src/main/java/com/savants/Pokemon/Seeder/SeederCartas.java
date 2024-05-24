@@ -162,6 +162,60 @@ public class SeederCartas {
         if (cartaService.getCartaPorId(2L).isEmpty()){
             cartaService.guardarCarta(carta2);
         }
+
+        Pokemon pokemon3 = pokemonService.getPokemonPorId(3L).get();
+        TipoEnergia tipoEnergia3 = tipoEnergiaService.getTipoEnergiaPorId(2L).get();
+        TipoCarta tipoCarta3 = tipoCartaService.getTipoCartaPorId(1L).get();
+        Sobre sobre1 = sobreService.obtenerSobrePorId(1L);
+
+        Carta carta3 = new Carta();
+        carta3.setNombre(pokemon3.getPokemonName());
+        carta3.setDescripcion("Venasaur");
+        carta3.setImagen("venasaur.png");
+        carta3.setPokemon(pokemon3);
+        carta3.setTipoEnergia(tipoEnergia3);
+        carta3.setTipoCarta(tipoCarta3);
+        carta3.setSobre(sobre1);
+
+        if (cartaService.getCartaPorId(3L).isEmpty()){
+            cartaService.guardarCarta(carta3);
+        }
+
+        Pokemon pokemon4 = pokemonService.getPokemonPorId(3L).get();
+        TipoEnergia tipoEnergia4 = tipoEnergiaService.getTipoEnergiaPorId(2L).get();
+        TipoCarta tipoCarta4 = tipoCartaService.getTipoCartaPorId(1L).get();
+
+
+        Carta carta4 = new Carta();
+        carta4.setNombre(pokemon4.getPokemonName());
+        carta4.setDescripcion("charmander");
+        carta4.setImagen("charmander.png");
+        carta4.setPokemon(pokemon4);
+        carta4.setTipoEnergia(tipoEnergia4);
+        carta4.setTipoCarta(tipoCarta4);
+        carta4.setSobre(sobre1);
+
+        if (cartaService.getCartaPorId(3L).isEmpty()){
+            cartaService.guardarCarta(carta4);
+        }
+
+        Pokemon pokemon5 = pokemonService.getPokemonPorId(3L).get();
+        TipoEnergia tipoEnergia5 = tipoEnergiaService.getTipoEnergiaPorId(2L).get();
+        TipoCarta tipoCarta5 = tipoCartaService.getTipoCartaPorId(1L).get();
+
+
+        Carta carta5 = new Carta();
+        carta5.setNombre(pokemon5.getPokemonName());
+        carta5.setDescripcion("charmeleon");
+        carta5.setImagen("charmeleon.png");
+        carta5.setPokemon(pokemon4);
+        carta5.setTipoEnergia(tipoEnergia4);
+        carta5.setTipoCarta(tipoCarta4);
+        carta5.setSobre(sobre1);
+
+        if (cartaService.getCartaPorId(3L).isEmpty()){
+            cartaService.guardarCarta(carta5);
+        }
     }
 
 }

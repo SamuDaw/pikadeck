@@ -47,8 +47,9 @@ public class User {
     private Carrito carrito;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
-            name = "User_Carta",
+            name = "user_carta",
             joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_carta"))
     private List<Carta> cartas = new ArrayList<>();

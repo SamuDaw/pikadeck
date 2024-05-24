@@ -4,6 +4,7 @@ import com.savants.Pokemon.DTOs.LoginRequest;
 import com.savants.Pokemon.DTOs.RegisterRequest;
 import com.savants.Pokemon.DTOs.TokenRequest;
 import com.savants.Pokemon.Services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +22,13 @@ public class AuthController {
 
     @PostMapping(value = "login")
     public ResponseEntity<TokenRequest> login(@RequestBody LoginRequest request) {
-        return ResponseEntity.ok(userService.login(request));
+        // Try para controlar que el login sea correcto
+        try {
+            return ResponseEntity.ok(userService.login(request));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
     @PostMapping(value = "register")

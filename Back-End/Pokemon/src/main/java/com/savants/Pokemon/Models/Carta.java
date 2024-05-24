@@ -1,11 +1,13 @@
 package com.savants.Pokemon.Models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -52,7 +54,8 @@ public class Carta {
     private Sobre sobre;
 
     @ManyToMany(mappedBy = "cartas")
-    private List<User> users;
+    @JsonIgnore
+    private List<User> users = new ArrayList<>();
 
     public Long getIdCarta() {
         return idCarta;

@@ -1,0 +1,66 @@
+.escaparate{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7em;
+    padding: 2% 10% 2% 10%;
+}
+.producto{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0px solid #f1f1f1;
+    border-radius: 5px;
+    background-color: #313131;
+}
+.infoProducto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    color: white;
+}
+.banner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-image: url('src/Assets/banner.jpg');
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: 50% 50%;
+}
+.banner h1{
+    font-size: 3em;
+    margin-bottom: 2px;
+    margin-top: 2%;
+    color: white;
+}
+.banner p{
+    font-size: 1.5em;
+    margin: 4% 10% 2% 10%;
+    color: white;
+}
+.boton-carrito{
+    background-color: #fff;
+    color: #111111;
+    margin-top: 1em;
+    padding: 10px;
+    border-radius: 5px;
+    width: 5em;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.boton-carrito:hover{
+    background-color: #111111;
+    color: #fff;
+}
+.boton-carrito:active{
+    background-color: #f1f1f1;
+    color: #fff;
+}
