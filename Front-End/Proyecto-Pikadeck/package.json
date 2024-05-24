@@ -1,6 +1,7 @@
 {
   "name": "proyecto-pikadeck",
   "private": true,
+  "homepage": "https://samudaw.github.io/pikadeck/dist",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
